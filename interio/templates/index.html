@@ -39,13 +39,18 @@
         <div class="colorlib-table-cell js-fullheight">
           <div class="row no-gutters">
             <div class="col-md-12 text-center">
-              <h1 class="mb-4"><a href="index.html" class="logo">Space<span>wood</span></a></h1>
+              <h1 class="mb-4"><a href="index.html" class="logo">Personal<span>Perch</span></a></h1>
               <ul>
                 <li class="active"><a href="index.html"><span>Home</span></a></li>
                 <li><a href="work.html"><span>Work</span></a></li>
                 <li><a href="about.html"><span>About</span></a></li>
                 <li><a href="blog.html"><span>Blog</span></a></li>
                 <li><a href="contact.html"><span>Contact</span></a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}"><span>Login</span></a></li>
+                {% endif %}
               </ul>
             </div>
           </div>
@@ -57,37 +62,41 @@
       <header>
       	<div class="container">
 	        <div class="colorlib-navbar-brand">
-	          <a class="colorlib-logo" href="index.html">Space<span>wood</span></a>
+	          <a class="colorlib-logo" href="{% url 'profiles:home' %}">Personal<span>Perch</span></a>
 	        </div>
 	        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
         </div>
       </header>
 
-			<section class="hero">
-				<div class="con d-flex align-items-center justify-content-end">
-					<a href="#">View All Project</a>
+
+			<section class="hero" >
+				<div class="con d-flex align-items-center justify-content-end" style="visibility: hidden;">
+					<!--- a href="#">View All Project</a>% }-->
 				</div>
+
+        {% block body %}
+        
 			  <div class="home-slider owl-carousel js-fullheight">
 
-				{% for post in posts %}
+        {% for post in posts %}
 		      <div class="slider-item =js-fullheight">
-		      	<div class="overlay"></div>
+		      	<!-- <div class="overlay"></div> -->
 		        <div class="container">
 		          <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
 		          	<div class="one-third order-md-last img" style="background-image:url({{ post.image.url }});">
-		          		<div class="overlay"></div>
+		          		<!-- <div class="overlay"></div> -->
 		          	</div>
 			          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-			          	<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+			          	<!-- <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
 		    						<span class="ion-ios-play play"></span>
-		    					</a>
+		    					</a> -->
 			          	<div class="text">
-			          		<h2><a href="#">{{ post.title }}</a></h2>
+			          		<h2><a href="{% url 'profiles:detail' post.pk %}">{{ post.title }}</a></h2>
 			          		<span class="cat">{{ post.sub_title }}</span>
 			          		<div class="my-5">
 			          			<p>{{ post.description }}</p>
 			          		</div>
-			          		<p><a href="#" class="btn-custom">View Project</a></p>
+			          		<a href="{% url 'profiles:detail' post.pk %}">View Project</a>
 			            </div>
 			          </div>
 		        	</div>
@@ -95,114 +104,39 @@
 			  </div>
 			  {% endfor %}
 
-		      <div class="slider-item js-fullheight">
-		      	<div class="overlay"></div>
-		        <div class="container">
-		          <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-		          	<div class="one-third order-md-last img" style="background-image:url(images/work-2.jpg);">
-		          		<div class="overlay"></div>
-		          	</div>
-			          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-			          	<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-		    						<span class="ion-ios-play play"></span>
-		    					</a>
-			          	<div class="text">
-			          		<h2><a href="#">Gray Padded Chairs</a></h2>
-			          		<span class="cat">Exterior</span>
-			          		<div class="my-5">
-			          			<p>A small river named Duden flows by their place and supplies</p>
-			          		</div>
-			          		<p><a href="#" class="btn-custom">View Project</a></p>
-			            </div>
-			          </div>
-		        	</div>
-		        </div>
-		      </div>
+		      
 
-		      <div class="slider-item js-fullheight">
-		      	<div class="overlay"></div>
-		        <div class="container">
-		          <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-		          	<div class="one-third order-md-last img" style="background-image:url(images/work-3.jpg);">
-		          		<div class="overlay"></div>
-		          	</div>
-			          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-			          	<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-		    						<span class="ion-ios-play play"></span>
-		    					</a>
-			          	<div class="text">
-			          		<h2><a href="#">Brown Wooden</a></h2>
-			          		<span class="cat">Interior</span>
-			          		<div class="my-5">
-			          			<p>A small river named Duden flows by their place and supplies</p>
-			          		</div>
-			          		<p><a href="#" class="btn-custom">View Project</a></p>
-			            </div>
-			          </div>
-		        	</div>
-		        </div>
-		      </div>
+		      
 
-		      <div class="slider-item js-fullheight">
-		      	<div class="overlay"></div>
-		        <div class="container">
-		          <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-		          	<div class="one-third order-md-last img" style="background-image:url(images/work-4.jpg);">
-		          		<div class="overlay"></div>
-		          	</div>
-			          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-			          	<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-		    						<span class="ion-ios-play play"></span>
-		    					</a>
-			          	<div class="text">
-			          		<h2><a href="#">Ceiling Chairs</a></h2>
-			          		<span class="cat">Interior</span>
-			          		<div class="my-5">
-			          			<p>A small river named Duden flows by their place and supplies</p>
-			          		</div>
-			          		<p><a href="#" class="btn-custom">View Project</a></p>
-			            </div>
-			          </div>
-		        	</div>
-		        </div>
-		      </div>
-
-		      <div class="slider-item js-fullheight">
-		      	<div class="overlay"></div>
-		        <div class="container">
-		          <div class="row d-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-		          	<div class="one-third order-md-last img" style="background-image:url(images/work-5.jpg);">
-		          		<div class="overlay"></div>
-		          	</div>
-			          <div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-			          	<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
-		    						<span class="ion-ios-play play"></span>
-		    					</a>
-			          	<div class="text">
-			          		<h2><a href="#">Water at Nighttime</a></h2>
-			          		<span class="cat">Exterior</span>
-			          		<div class="my-5">
-			          			<p>A small river named Duden flows by their place and supplies</p>
-			          		</div>
-			          		<p><a href="#" class="btn-custom">View Project</a></p>
-			            </div>
-			          </div>
-		        	</div>
-		        </div>
-		      </div>
+		      
 		    </div>
 		  </section>
 
-	    <footer class="footer d-flex align-items-center">
-	    	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	  		<ul class="footer-social">
-          <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-          <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-          <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-        </ul>
-	    </footer>
+		  <section class="ftco-section ftco-no-pt">
+				<div class="container">
+					<div class="row">
+						{% for post in posts %}
+						<div class="col-md-4 ftco-animate">
+							<div class="project">
+								<a href="{% url 'profiles:detail' post.pk %}" class="img d-flex align-items-center justify-content-center" style="background-image:url({{ post.image.url }});">
+									<div class="icon d-flex align-items-center justify-content-center">
+										<span class="ion-ios-search"></span>
+									</div>
+								</a>
+								<div class="text">
+									<span class="subheading">{{ post.sub_title }}</span>
+									<h3 class="mb-0"><a href="{% url 'profiles:detail' post.pk %}">{{ post.title }}</a></h3>
+								</div>
+							</div>
+						</div>
+						{% endfor %}					
+				</div>	
+			</section>
+
+			{% endblock %}
+	
+
+	    
 
       <!-- loader -->
       <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
