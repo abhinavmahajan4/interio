@@ -27,3 +27,9 @@ class Login(views.LoginView):
 
 
 
+def contact(request):
+    return render(request,'contact.html')
+
+
+
+    
