@@ -2,10 +2,9 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Post
 from django.contrib.auth import views
-
-# # Create your views here.
-# def index(request):
-#     return render(request,'index.html')
+from .forms import *
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
 
 class Index(generic.ListView):
     model = Post
@@ -25,6 +24,38 @@ class PostDetail(generic.DetailView):
 class Login(views.LoginView):
     template_name = 'registration/login.html'
 
+
+class PostCreate(generic.CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'postform.html'
+    # success_url = reverse_lazy('profiles:home')
+
+    def form_valid(self, form, *args, **kwargs):
+        obj = form.save(commit=False)
+        obj.created_by = self.request.user
+        obj.save()
+        return super(PostCreate, self).form_valid(form, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('profiles:detail', kwargs={'pk' : self.object.pk})
+
+class PostUpdate(generic.UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'postform.html'
+    success_url = reverse_lazy('profiles:detail')
+
+    def get_success_url(self, *args, **kwargs):
+        return reverse_lazy('profiles:detail', kwargs={'pk':self.kwargs['pk']})
+
+class PostDelete(generic.DeleteView):
+    model = Post
+    # template_name = 'postform.html'
+    success_url = reverse_lazy('profiles:home')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 
 def contact(request):

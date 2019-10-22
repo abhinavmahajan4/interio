@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Personal Perch</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
-	
-	{% load static %}
 
-    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
-    
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<head>
+  <title>Personal Perch</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+  {% load static %}
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
-    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}">
 
-    
-    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  </head>
-  <body>
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 
-    <div class="page">
+  <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}">
+
+
+  <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+  <div class="page">
     <nav id="colorlib-main-nav" role="navigation">
       <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle active"><i></i></a>
       <div class="js-fullheight colorlib-table">
@@ -42,11 +44,10 @@
               <h1 class="mb-4"><a href="index.html" class="logo">Personal<span>Perch</span></a></h1>
               <ul>
                 <li class="active"><a href="index.html"><span>Home</span></a></li>
-                <li><a href="work.html"><span>Work</span></a></li>
                 <li><a href="about.html"><span>About</span></a></li>
-                <li><a href="blog.html"><span>Blog</span></a></li>
                 <li><a href="{%url 'profiles:contact'%}"><span>Contact</span></a></li>
                 {% if request.user.is_authenticated %}
+                <li><a href="{% url 'profiles:create' %}"><span>Add Post</span></a></li>
                 <li><a href="{% url 'logout' %}"><span>Logout</span></a></li>
                 {% else %}
                 <li><a href="{% url 'login' %}"><span>Login</span></a></li>
@@ -57,108 +58,123 @@
         </div>
       </div>
     </nav>
-    
+
     <div id="colorlib-page">
       <header>
-      	<div class="container">
-	        <div class="colorlib-navbar-brand">
-	          <a class="colorlib-logo" href="{% url 'profiles:home' %}">Personal<span>Perch</span></a>
-	        </div>
-	        <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+        <div class="container">
+          <div class="colorlib-navbar-brand">
+            <a class="colorlib-logo" href="{% url 'profiles:home' %}">Personal<span>Perch</span></a>
+          </div>
+          <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
         </div>
       </header>
 
 
-			<section class="hero" >
-				<div class="con d-flex align-items-center justify-content-end" style="visibility: hidden;">
-					<!--- a href="#">View All Project</a>% }-->
-				</div>
+      <section class="hero">
+        <div class="con d-flex align-items-center justify-content-end" style="visibility: hidden;">
+          <!--- a href="#">View All Project</a>% }-->
+        </div>
 
         {% block body %}
-        
-			  <div class="home-slider owl-carousel js-fullheight">
 
-        {% for post in posts %}
-		      <div class="slider-item =js-fullheight">
-		      	<!-- <div class="overlay"></div> -->
-		        <div class="container">
-		          <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
-		          	<div class="one-third order-md-last img" style="background-image:url({{ post.image.url }});">
-		          		<!-- <div class="overlay"></div> -->
-		          	</div>
-			          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-			          	<!-- <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
+        <div class="home-slider owl-carousel js-fullheight">
+
+          {% for post in posts %}
+          <div class="slider-item =js-fullheight">
+            <!-- <div class="overlay"></div> -->
+            <div class="container">
+              <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end"
+                data-scrollax-parent="true">
+                <div class="one-third order-md-last img" style="background-image:url({{ post.image.url }});">
+                  <!-- <div class="overlay"></div> -->
+                </div>
+                <div class="one-forth d-flex  align-items-center ftco-animate"
+                  data-scrollax=" properties: { translateY: '70%' }">
+                  <!-- <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
 		    						<span class="ion-ios-play play"></span>
 		    					</a> -->
-			          	<div class="text">
-			          		<h2><a href="{% url 'profiles:detail' post.pk %}">{{ post.title }}</a></h2>
-			          		<span class="cat">{{ post.sub_title }}</span>
-			          		<div class="my-5">
-			          			<p>{{ post.description }}</p>
-			          		</div>
-			          		<a href="{% url 'profiles:detail' post.pk %}">View Project</a>
-			            </div>
-			          </div>
-		        	</div>
-		        </div>
-			  </div>
-			  {% endfor %}
+                  <div class="text">
+                    <h2><a href="{% url 'profiles:detail' post.pk %}">{{ post.title }}</a></h2>
+                    <span class="cat">{{ post.sub_title }}</span>
+                    <div class="my-5">
+                      <p>{{ post.description }}</p>
+                    </div>
+                    <a href="{% url 'profiles:detail' post.pk %}">View Project</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
 
-		      
 
-		      
 
-		      
-		    </div>
-		  </section>
 
-		  <section class="ftco-section ftco-no-pt">
-				<div class="container">
-					<div class="row">
-						{% for post in posts %}
-						<div class="col-md-4 ftco-animate">
-							<div class="project">
-								<a href="{% url 'profiles:detail' post.pk %}" class="img d-flex align-items-center justify-content-center" style="background-image:url({{ post.image.url }});">
-									<div class="icon d-flex align-items-center justify-content-center">
-										<span class="ion-ios-search"></span>
-									</div>
-								</a>
-								<div class="text">
-									<span class="subheading">{{ post.sub_title }}</span>
-									<h3 class="mb-0"><a href="{% url 'profiles:detail' post.pk %}">{{ post.title }}</a></h3>
-								</div>
-							</div>
-						</div>
-						{% endfor %}					
-				</div>	
-			</section>
 
-			{% endblock %}
-	
 
-	    
+        </div>
+      </section>
+
+
+      <div class="col-md-12 ftco-animate text-center" style="padding-top:5%">
+
+        <h1 class="bread">All Posts</h1>
+      </div>
+
+      <section class="ftco-section ftco-no-pt">
+        <div class="container">
+          <div class="row">
+            {% for post in posts %}
+            <div class="col-md-4 ftco-animate">
+              <div class="project">
+                <a href="{% url 'profiles:detail' post.pk %}"
+                  class="img d-flex align-items-center justify-content-center"
+                  style="background-image:url({{ post.image.url }});">
+                  <div class="icon d-flex align-items-center justify-content-center">
+                    <span class="ion-ios-search"></span>
+                  </div>
+                </a>
+                <div class="text">
+                  <span class="subheading">{{ post.sub_title }}</span>
+                  <h3 class="mb-0"><a href="{% url 'profiles:detail' post.pk %}">{{ post.title }}</a></h3>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+      </section>
+
+      {% endblock %}
+
+
+
 
       <!-- loader -->
-      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+          <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+          <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+            stroke="#F96D00" /></svg></div>
 
-      </div>
     </div>
+  </div>
 
 
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
-    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'js/aos.js' %}"></script>
-    <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
-    <script src="{% static 'js/scrollax.min.js' %}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="{% static 'js/google-map.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-  </body>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+
 </html>

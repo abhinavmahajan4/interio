@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<section class="ftco-section ftco-no-pt ftco-no-pb contact-section" style="padding-top: 4%;">
+
+
+    <div class="container">
+        <div class="row block-9">
+
+            <div class="col-md-6 order-first ftco-animate">
+                <form action="" class="p-4 p-md-5" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form-group">
+                        <span class="text-danger small">{{ field.errors }}</span>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary py-3 px-5">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>
+{% endblock %}
