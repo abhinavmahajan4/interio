@@ -3,6 +3,8 @@
 .vscode/
 .venv/
 
+Assets/
+
 ### Django ###
 *.log
 *.pot
